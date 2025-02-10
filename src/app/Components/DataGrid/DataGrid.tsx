@@ -1,166 +1,70 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react';
+import { FaPencilAlt } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
+import './style/Style.css';
 
-const DataGrid = () => {
+const DataGrid = ({ columns: exColumns = [], rows = [], handleModuleState, rowHeight = 10 }: any) => {
+  const [columns] = useState<any>([
+    {
+      field: 'rowNumber',
+      headerName: 'ردیف',
+      width: '50px',
+      renderCell: (_: any, index: number) => index + 1, // شماره ردیف
+    },
+    ...exColumns,
+    {
+      field: 'op',
+      headerName: 'عملیات',
+      width: '120px',
+      renderCell: (row: any, index: number) => (
+        <div className="flex p-2 justify-between">
+          <button className="btn btn-circle btn-sm" onClick={() => initialEdit(row)}>
+            <FaPencilAlt className="text-green-500" />
+          </button>
+          <button className="btn btn-circle btn-sm">
+            <FaTrash className="text-red-500" />
+          </button>
+        </div>
+      ),
+    },
+  ]);
+
+  const initialEdit = (row: any) => {
+    handleModuleState((prev: any) => ({ ...prev, modal: true, mode: 'edit', selectedRow: row }));
+  };
+
   return (
     <div className="overflow-x-auto">
-  <table className="table">
-    {/* head */}
-    <thead>
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Hart Hagerty</div>
-              <div className="text-sm opacity-50">United States</div>
-            </div>
-          </div>
+      <table className="table">
+        <thead>
+          <tr>
+            {columns.map((column: any, index: number) => (
+              <th key={index} style={{ textAlign: 'center', width: column.width }}>
+                {column.headerName}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+  {rows.map((row: any, rowIndex: number) => (
+    <tr key={rowIndex} style={{ textAlign: 'center', height: `${rowHeight}px` }}>
+      {columns.map((column: any, colIndex: number) => (
+        <td 
+          key={colIndex} 
+          className="text-center" 
+          style={{ height: `${rowHeight}px`, lineHeight: `${rowHeight}px`, padding: "2px 5px" }}
+        >
+          {column.renderCell ? column.renderCell(row, rowIndex) : row[column.field]}
         </td>
-        <td>
-          Zemlak, Daniel and Leannon
-          <br />
-          <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-        </td>
-        <td>Purple</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 2 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/3@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Brice Swyre</div>
-              <div className="text-sm opacity-50">China</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Carroll Group
-          <br />
-          <span className="badge badge-ghost badge-sm">Tax Accountant</span>
-        </td>
-        <td>Red</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/4@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Marjy Ferencz</div>
-              <div className="text-sm opacity-50">Russia</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Rowe-Schoen
-          <br />
-          <span className="badge badge-ghost badge-sm">Office Assistant I</span>
-        </td>
-        <td>Crimson</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-      {/* row 4 */}
-      <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
-        <td>
-          <div className="flex items-center gap-3">
-            <div className="avatar">
-              <div className="mask mask-squircle h-12 w-12">
-                <img
-                  src="https://img.daisyui.com/images/profile/demo/5@94.webp"
-                  alt="Avatar Tailwind CSS Component" />
-              </div>
-            </div>
-            <div>
-              <div className="font-bold">Yancy Tear</div>
-              <div className="text-sm opacity-50">Brazil</div>
-            </div>
-          </div>
-        </td>
-        <td>
-          Wyman-Ledner
-          <br />
-          <span className="badge badge-ghost badge-sm">Community Outreach Specialist</span>
-        </td>
-        <td>Indigo</td>
-        <th>
-          <button className="btn btn-ghost btn-xs">details</button>
-        </th>
-      </tr>
-    </tbody>
-    {/* foot */}
-    <tfoot>
-      <tr>
-        <th></th>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-  )
-}
+      ))}
+    </tr>
+  ))}
+</tbody>
 
-export default DataGrid
+      </table>
+    </div>
+  );
+};
+
+export default DataGrid;

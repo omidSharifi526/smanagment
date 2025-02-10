@@ -1,12 +1,4 @@
-'use client'
-import React from 'react'
-import DataGrid from '@/app/Components/DataGrid/DataGrid'
-
-const pages = () => {
-
-
-
-  const columns = [
+const columns = [
     { field: 'id', headerName: 'ID' },
     { field: 'firstName', headerName: 'نام ' },
     { field: 'lastName', headerName: 'نام خانوادگی' },
@@ -23,18 +15,7 @@ const pages = () => {
     { id: 5, firstName: 'Daenerys', lastName: 'Targaryen', age: null },
   ];
 
-
-
-
-
-
-  return (
-    <div  className='container'  >
-  <DataGrid  
-  columns={columns} 
-  rows={rows} />
-    </div>
-  )
-}
-
-export default pages
+  export {
+    columns,
+    rows
+  }
