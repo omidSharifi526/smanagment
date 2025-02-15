@@ -103,7 +103,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end gap-4">
-        <span className="text-sm font-bold dark:text-white">
+        <span className="text-sm font-bold dark:text-white w-[100px]   whitespace-nowrap ">
           {today}
         </span>
         <ToggleColor />

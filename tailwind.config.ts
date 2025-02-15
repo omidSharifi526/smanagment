@@ -17,9 +17,9 @@ module.exports = {
         'red-black-gradient': 'linear-gradient(to right, #FF0000 5%, #255D5F 80%)',
       },
       spacing: {
-        'modal-padding': '0px', // حذف padding مودال
-      },
-      
+        'modal-padding': '0px !important', // حذف padding مودال
+      }
+    
       
     },
   },
