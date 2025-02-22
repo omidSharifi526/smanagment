@@ -1,17 +1,13 @@
-import React from 'react';
-import Navbar from '../Components/DataGrid/Navabr/Navbar';
+import React from "react";
+import Navbar from "../Components/DataGrid/Navabr/Navbar";
 
-const page = ({children}:any) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
-        <Navbar/>
-
-        {
-            children
-        }
-
+      <Navbar />
+      <main>{children}</main>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default Layout;

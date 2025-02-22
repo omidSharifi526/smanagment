@@ -3,7 +3,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { StoreEntity } from '../../Interface';
 import TextField from '@/app/Components/FormControls/TextInput/TextInput';
 import SingleCheckBox from '@/app/Components/FormControls/CheckBox/SingleCheckBox';
-
 const AddStore = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<StoreEntity>({
     defaultValues: {

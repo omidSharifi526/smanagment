@@ -17,8 +17,8 @@ const Modal = ({ show, mode, label, changeModalState,children}: any) => {
   };
 
   return (
-    <dialog ref={modalRef} className="modal bg-transparent ">
-      <div className=" modal-box w-11/12 max-w-5xl flex flex-col  rounded-box p-0 pb-1 ">
+    <dialog ref={modalRef} className="modal bg-transparent  ">
+      <div className=" modal-box w-11/12 max-w-5xl flex flex-col  rounded-box p-0 pb-1 h-auto ">
         {/* هدر مودال */}
         <div className="w-full flex justify-between items-center bg-red-black-gradient p-1 ">
           <span className="text-white p-2">

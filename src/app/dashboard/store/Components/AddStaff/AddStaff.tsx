@@ -4,6 +4,10 @@ import { StaffEntity } from '../../Interface';
 import TextField from '@/app/Components/FormControls/TextInput/TextInput';
 import SingleCheckBox from '@/app/Components/FormControls/CheckBox/SingleCheckBox';
 import { SelectField } from '@/app/Components/FormControls/SelectField/SelectField';
+// import DateField from '@/app/Components/FormControls/DatePicker/DatePicker';
+// import DatePickerField from '@/app/Components/FormControls/DatePicker/DatePicker';
+// import TimePickerField from '@/app/Components/TimePicker/TimePicker';
+import DatePickerField from '@/app/Components/FormControls/DatePicker/Datepicker';
 
 const AddStaff: React.FC = () => {
   const { control, handleSubmit, formState: { errors } } = useForm<StaffEntity>({
@@ -75,6 +79,23 @@ const AddStaff: React.FC = () => {
       ]}
      /> 
     </div>
+    <div>
+        <DatePickerField 
+            // control={control} 
+            // name="birthdate" 
+            // label="تاریخ تولد" 
+            // rules={{ required: "انتخاب تاریخ الزامی است" }} 
+            />
+        </div>
+
+        {/* <div>
+        <TimePickerField 
+          control={control} 
+          name="selectedTime" 
+          label="زمان موردنظر" 
+          rules={{ required: "لطفاً یک زمان انتخاب کنید" }} 
+            />
+        </div> */}
 
     {/* SelectField */}
 

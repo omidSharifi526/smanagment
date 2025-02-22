@@ -7,6 +7,8 @@ import AddStore from '../store/Components/AddStore/AddStore'
 import Modal from '@/app/Components/Modal/Modal';
 import StoreDetails from './Components/StoreDetails/StoreDetails';
 import AddStaff from './Components/AddStaff/AddStaff';
+import DatePickerField from '@/app/Components/FormControls/DatePicker/Datepicker';
+import DateTimePicker from '@/app/Components/DateTimePicker/DateTimePicker';
 
 
 const page = () => {
@@ -39,7 +41,13 @@ const page = () => {
       <div className=''>
       <StoreDetails  setStoreInfoModal={setStoreInfoModal}   />
       </div>
-      
+      <div>
+        <DatePickerField/>
+      </div>
+      <div>
+        <DateTimePicker/>
+      </div>
+
 
      </div>
     
@@ -57,8 +65,6 @@ const page = () => {
     
     >
       
-
-      {
         <DataGrid 
         rows={rows}
         columns={columns}
@@ -66,7 +72,7 @@ const page = () => {
         
 
         />
-      }
+      
       {
       orderModuleState?.modal &&  <Modal 
       show={orderModuleState.modal} 

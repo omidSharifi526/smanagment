@@ -1,9 +1,21 @@
 'use client'
-import React from 'react'
-import DataGrid from '@/app/Components/DataGrid/DataGrid'
+
+import React,{useState,useEffect} from 'react';
+import MainLayout from '@/app/Components/MainLayout/MainLayout';
+import DataGrid from '@/app/Components/DataGrid/DataGrid';
+import {columns,rows} from '../../MocData/index';
+import Modal from '@/app/Components/Modal/Modal';
+import AddCustomer from './Components/Forms/AddCustomer/AddCustomer';
+
 
 const pages = () => {
-
+  const initialModuleState={
+    hasAddButton:true,
+    mainLabel:'مشتریان',
+    modal:false,
+    mode:null
+  }
+const [customerModuleState, setCustomerModuleState] = useState(initialModuleState)
 
 
   const columns = [
@@ -29,11 +41,41 @@ const pages = () => {
 
 
   return (
-    <div  className='container'  >
-  <DataGrid  
-  columns={columns} 
-  rows={rows} />
-    </div>
+<>
+    <MainLayout 
+    // hasAddButton={true}
+    setModuleState={setCustomerModuleState}
+    moduleDetails={customerModuleState}
+    
+    >
+      
+
+      {
+        <DataGrid 
+        rows={rows}
+        columns={columns}
+        handleModuleState={setCustomerModuleState}
+        
+
+        />
+      }
+      {
+      customerModuleState?.modal &&  <Modal 
+      show={customerModuleState.modal} 
+      changeModalState={setCustomerModuleState}  
+      mode={customerModuleState.mode}
+      label={'مشتری'}
+      
+      >
+        <AddCustomer/>
+
+        </Modal>
+      }
+
+    </MainLayout>
+
+   
+   </>
   )
 }
 

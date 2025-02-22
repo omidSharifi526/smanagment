@@ -15,5 +15,41 @@ body {
   direction: rtl;
   text-align: right;
 }
+.MuiPickersCalendarHeader-root{
+  font-family: "IS" !important;
 
+  z-index: 10000;
+  display: flex !important;
+}
 
+.MuiPickersDay-root {
+  /* color: red !important; */
+  font-family: "IS" !important;
+  /* position: absolute !important; */
+}
+
+.MuiDayCalendar-weekDayLabel{
+  font-family: "IS" !important;
+
+}
+
+.MuiPickersCalendarHeader-label{
+  font-family: "IS" !important;
+
+}
+.MuiInputBase-root{
+  font-family: "IS" !important;
+  
+}
+.MuiPickersArrowSwitcher-leftArrowIcon{
+  rotate: 180deg;
+}
+
+.MuiPickersArrowSwitcher-rightArrowIcon{
+  rotate: 180deg;
+}
+.MuiDayCalendar-header{
+  background-color: rgba(255, 0, 255, 0.137);
+  margin: 2px;
+  box-shadow: 2px 2px 8px 1px  rgba(0, 0, 0, 0.315);
+}
