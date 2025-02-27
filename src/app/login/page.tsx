@@ -1,25 +1,41 @@
 'use client'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import Link from 'next/link';
+import { useRouter } from "next/navigation";
+import { useLogin } from './hooks';
+import Loading from '../Components/Loading/Loading';
 
 const Login = () => {
+ 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+  const{mutate:callLogin,data:loginResponse,isPending,isSuccess}=useLogin();
+
+
   
-    const handleLogin = (e: React.FormEvent) => {
+
+
+
+
+  
+    const handleLogin = async (e:any) => {
       e.preventDefault();
+      callLogin({username,password})
   
-      // اینجا می‌توانید لاجیک احراز هویت را اضافه کنید
-      console.log("نام کاربری:", username);
-      console.log("رمز عبور:", password);
-  
-      // در حالت واقعی، درخواست لاگین به بک‌اند فرستاده می‌شود
-      alert(`ورود با نام کاربری: ${username}`);
+    
+
     };
+
+    if (isPending) {
+     return <Loading/>
+    }
+
+  
+    
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen">
         
     <div className="card w-full max-w-sm shadow-2xl bg-base-100">
       <div className="card-body">
@@ -57,11 +73,11 @@ const Login = () => {
 
           {/* دکمه ورود */}
           <div className="form-control mt-6">
-            <Link href="/dashboard/overview"  >
-            <button type="submit" className="btn btn-primary">
-              ورود
-            </button>
-            </Link>
+           
+            <button type='submit' onClick={(e:any)=>{
+           handleLogin(e)
+            }}>ورود</button>
+           
            
           </div>
         </form>

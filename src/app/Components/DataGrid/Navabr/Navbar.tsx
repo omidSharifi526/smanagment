@@ -5,17 +5,67 @@ import Link from 'next/link';
 import ToggleColor from '../../ToggleMode/ToggleMode';
 import moment from "moment-jalaali";
 import { MdStore } from "react-icons/md";
-import { menuItems } from './Statics/index';
+import { menuItems } from './menuItems';
+// import UserInfo from './Componets/UserInfo/UserInfo';
+const UserInfo = React.lazy(() => import('./Componets/UserInfo/UserInfo'));
+import DateInfo from './Componets/DateInfo/DateInfo';
+
+
 import { MenuItemFace } from './interface';
 import { FcBullish } from "react-icons/fc";
 import { FaFolder, FaCube, FaChartSimple, FaCubes, FaFileInvoice, FaHandshakeAngle, FaPeopleGroup, FaWarehouse, FaTruck, FaShop, FaArrowRightFromBracket } from "react-icons/fa6";
 
-moment.loadPersian({ usePersianDigits: true });
 
-const Navbar = () => {
+
+const Navbar = ({storeType,bussinesType}:any) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentMenu, setCurrentMenu] = useState<any>([]);
+  const [bussinesTypeName, setBussinesTypeName] = useState<string|null>('')
   const menuRef = useRef(null);
-  const today = moment().format("dddd jYYYY/jMM/jDD");
+  console.log(currentMenu)
+
+  useEffect(() => {
+    
+    const currentMenu = menuItems[storeType] || [];
+  
+    setCurrentMenu(currentMenu)
+
+    const storeTypeName = 
+    bussinesType === 1 ? 'فروش محصول' :
+    bussinesType === 2 ? 'فروش خدمات' : 
+    'فروش خدمات و محصول';
+
+    setBussinesTypeName(storeTypeName)
+
+
+   
+  }, [storeType])
+  
+
+
+
+  
+
+
+
+  
+
+  //  const menuItems:any = {
+  //   admin: [
+  //     { label: "داشبورد", href: "/admin/dashboard", icon: "FaHome" },
+  //     { label: "محصولات", href: "/admin/products", icon: "FaBox" },
+  //     { label: "سفارشات", href: "/admin/orders", icon: "FaShoppingCart" },
+  //     { type: "divider" },
+  //     { label: "کاربران", href: "/admin/users", icon: "FaUser" },
+  //     { label: "تنظیمات", href: "/admin/settings", icon: "FaCog" },
+  //   ],
+  //   user: [
+  //     { label: "صفحه اصلی", href: "/", icon: "FaHome" },
+  //     { label: "فروشگاه", href: "/shop", icon: "FaStore" },
+  //     { label: "سبد خرید", href: "/cart", icon: "FaShoppingCart" },
+  //     { label: "سفارشات من", href: "/orders", icon: "FaBox" },
+  //   ],
+  // };
 
   // منوی همبرگری
   const toggleMenu = (event: React.MouseEvent) => {
@@ -42,9 +92,12 @@ const Navbar = () => {
     };
   }, []);
 
+  
+
   return (
     <div className="navbar bg-base-200">
-      <div className="navbar-start">
+
+      <div className="navbar-start gap-3">
         <div className="dropdown">
           <div tabIndex={0} role="button" onClick={toggleMenu} className="btn btn-ghost btn-circle">
             <svg
@@ -66,7 +119,7 @@ const Navbar = () => {
             tabIndex={0}
             className={`menu menu-sm lg:menu-lg lg:p-3 dropdown-content bg-base-200 rounded-1 z-[1] w-48 text-sm shadow-lg lg:w-64 lg:text-base ${isMenuOpen ? 'block' : 'hidden'}`}
           >
-            {menuItems.map((item: MenuItemFace, index: number) => {
+            {currentMenu.map((item: MenuItemFace, index: number) => {
               if (item.type === "divider") {
                 return <div key={index} className="divider" />;
               }
@@ -100,15 +153,29 @@ const Navbar = () => {
             })}
           </ul>
         </div>
+        <div className="navbar-start">
+        <span className='text-xs'    >
+          {
+             bussinesTypeName
+          }
+        </span>
+      </div>
       </div>
 
+
+    
+      
+
       <div className="navbar-end gap-4">
-        <span className="text-sm font-bold dark:text-white w-[100px]   whitespace-nowrap ">
-          {today}
-        </span>
+      <div>
+        <UserInfo   />
+      </div>
+       <div>
+        <DateInfo/>
+       </div>
         <ToggleColor />
 
-        <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-ghost btn-circle btn-xs">
           
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +191,7 @@ const Navbar = () => {
           </svg>
         </button>
 
-        <button className="btn btn-ghost btn-circle">
+        <button className="btn btn-ghost btn-circle btn-xs">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"

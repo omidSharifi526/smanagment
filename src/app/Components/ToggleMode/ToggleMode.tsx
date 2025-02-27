@@ -20,7 +20,7 @@ function ToggleColor() {
   return (
     <label className="swap swap-rotate">
       {/* این checkbox وضعیت تم را کنترل می‌کند */}
-      <input type="checkbox" onChange={handleThemeChange} />
+      <input type="checkbox" onChange={handleThemeChange} className='btn-xs' />
 
       {/* آیکون خورشید برای حالت لایت مود */}
       <svg
